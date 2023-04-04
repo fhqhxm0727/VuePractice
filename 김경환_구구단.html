@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .introduceMe {
+                text-align: right;
+                font-weight: bold;
+            }
+
+            .titleCSS {
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .fontNormal {
+                font-weight: normal;
+                padding : 10px;
+            }
+           
+            button {
+                background-color: rgba(0, 0, 125, 0.33);
+                color: white;
+                border-radius: 5px;
+                border-style: none;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="app">
+
+
+            <p v-bind:class="intoroduce">학번 : 2022291<br>이름 : 김경환</p>
+            
+            <br>
+            <p v-bind:class="myTitle">[구구단]
+                <button v-on:click="indexPlus">1단씩 추가</button>
+                <button v-on:click="indexMinus">마지막단 삭제</button></p>
+            <br><br>
+            
+            <table>
+                <thead>
+                    <th v-for="i in gugudan">{{i}}단</th>
+                </thead>
+                <tbody>
+                    <tr v-for="y in 9">
+                        <th v-for="x in gugudan" v-bind:class="NORMAL" >{{x}} * {{y}} = {{x*y}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    intoroduce : 'introduceMe',
+                    myTitle : 'titleCSS',
+                    NORMAL : 'fontNormal',
+                    nowDan : 9,
+                    gugudan: [2,3,4,5,6,7,8,9],    
+                },
+                methods: {
+                    indexPlus : function() {
+                        this.nowDan += 1
+                        this.gugudan.push(this.nowDan)
+                    },
+                    indexMinus : function() {
+                        this.nowDan -= 1
+                        this.gugudan.splice(this.gugudan.length-1, 1)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
